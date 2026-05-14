@@ -5,11 +5,11 @@
     <title>Global Logistics | Decode My Travel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #22d3ee; border-radius: 10px; }
         .tab-btn { flex: 1; padding: 15px; font-weight: 900; text-transform: uppercase; background: #0f172a; border: 1px solid #1e293b; color: #64748b; font-size: 11px; }
         .tab-btn.active { color: #22d3ee; border-bottom: 3px solid #22d3ee; }
         .hidden-panel { display: none; }
-        .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #22d3ee; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-slate-950 text-white p-4 md:p-10 font-sans">
@@ -28,110 +28,33 @@
                     <div>
                         <label class="block text-[10px] text-slate-500 mb-2 uppercase font-bold tracking-widest">Base Currency (I Have):</label>
                         <select id="from_val" class="w-full bg-slate-800 p-4 rounded-xl text-sm border border-slate-700 font-bold text-white outline-none">
-                            <option value="1">USD (Dollar)</option>
+                            <option value="1">USD (US Dollar)</option>
                             <option value="0.92">EUR (Euro)</option>
-                            <option value="0.79">GBP (Pound)</option>
-                            <option value="1.36">CAD (Canada)</option>
-                            <option value="155.5">JPY (Yen)</option>
-                            <option value="17.1">MXN (Peso)</option>
-                            <option value="1.52">AUD (Australia)</option>
-                            <option value="1.35">SGD (Singapore)</option>
-                            <option value="1.0">BSD (Bahamas)</option>
-                            <option value="11.0">NOK (Norway)</option>
-                            <option value="10.8">SEK (Sweden)</option>
-                            <option value="83.3">INR (India)</option>
-                            <option value="5.1">BRL (Brazil)</option>
-                            <option value="3.75">SAR (Saudi)</option>
-                            <option value="0.91">CHF (Swiss)</option>
+                            <option value="0.79">GBP (British Pound)</option>
+                            <option value="1.36">CAD (Canadian Dollar)</option>
+                            <option value="155.5">JPY (Japanese Yen)</option>
+                            <option value="17.1">MXN (Mexican Peso)</option>
+                            <option value="1.52">AUD (Australian Dollar)</option>
+                            <option value="1.35">SGD (Singapore Dollar)</option>
+                            <option value="1.0">BSD (Bahamian Dollar)</option>
+                            <option value="11.0">NOK (Norwegian Krone)</option>
+                            <option value="10.8">SEK (Swedish Krona)</option>
+                            <option value="83.3">INR (Indian Rupee)</option>
+                            <option value="5.1">BRL (Brazilian Real)</option>
+                            <option value="3.75">SAR (Saudi Riyal)</option>
+                            <option value="0.91">CHF (Swiss Franc)</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-[10px] text-slate-500 mb-2 uppercase font-bold tracking-widest">Target Currency (I Want):</label>
                         <select id="to_val" class="w-full bg-slate-800 p-4 rounded-xl text-sm border border-slate-700 font-bold text-white outline-none">
                             <option value="0.92">EUR (Euro)</option>
-                            <option value="1">USD (Dollar)</option>
-                            <option value="0.79">GBP (Pound)</option>
-                            <option value="17.1">MXN (Peso)</option>
-                            <option value="1.36">CAD (Canada)</option>
-                            <option value="155.5">JPY (Yen)</option>
-                            <option value="1.52">AUD (Australia)</option>
-                            <option value="1.35">SGD (Singapore)</option>
-                            <option value="1.0">BSD (Bahamas)</option>
-                            <option value="11.0">NOK (Norway)</option>
-                            <option value="10.8">SEK (Sweden)</option>
-                            <option value="83.3">INR (India)</option>
-                            <option value="5.1">BRL (Brazil)</option>
-                            <option value="3.75">SAR (Saudi)</option>
-                            <option value="0.91">CHF (Swiss)</option>
-                        </select>
-                    </div>
-                    <button onclick="runConvert()" class="w-full bg-cyan-500 text-slate-950 font-black py-5 rounded-xl uppercase tracking-widest hover:bg-cyan-400">Analyze Return</button>
-                    
-                    <div id="curr_output" class="hidden-panel mt-4 p-8 bg-slate-950 border border-slate-800 rounded-2xl text-center">
-                        <p class="text-slate-500 text-[10px] font-bold uppercase mb-2">Estimated Cash in Hand:</p>
-                        <p id="final_amt" class="text-5xl font-black text-cyan-400 tracking-tighter"></p>
-                        <p class="text-[9px] text-slate-600 mt-4 italic uppercase font-black tracking-widest leading-tight">Includes 4% "Reality Tax" (Bank/ATM Spread & Hidden Fees)</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="lg:col-span-7">
-            <div class="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden min-h-[650px] flex flex-col shadow-2xl">
-                <div class="flex">
-                    <button id="btn-c" onclick="showTab('c')" class="tab-btn active">Currency Intelligence</button>
-                    <button id="btn-a" onclick="showTab('a')" class="tab-btn">Airport & Port Entry</button>
-                </div>
-                <div class="p-8 flex-1 overflow-y-auto custom-scroll leading-relaxed">
-                    <div id="pan-c" class="space-y-6">
-                        <h3 class="text-cyan-400 font-black uppercase text-xl border-b border-slate-800 pb-2 italic">Currency Intelligence (2026)</h3>
-                        <div class="text-sm text-slate-300 space-y-4">
-                            <p><strong>1. The "Mid-Market" Illusion:</strong> Google shows the "Perfect" rate. In reality, bank fees and ATM spreads cost you 3%–7%. Our calculator builds in a <strong>4% Reality Buffer</strong> so you know what you'll actually have to spend.</p>
-                            <p><strong>2. The Dynamic Conversion Scam:</strong> When a card terminal asks if you want to pay in "Your Home Currency" or "Local Currency"—<strong>ALWAYS pick Local.</strong> Choosing your home currency allows the merchant to set their own predatory exchange rate.</p>
-                            <p><strong>3. Volatility Index:</strong> The Euro and Pound swing 6-8% annually. If the rate is 1.10, budget for 1.15 to protect your trip budget from sudden market shifts.</p>
-                        </div>
-                    </div>
-                    <div id="pan-a" class="hidden-panel space-y-6">
-                        <h3 class="text-cyan-400 font-black uppercase text-xl border-b border-slate-800 pb-2 italic">Airport & Port Exchange Traps</h3>
-                        <div class="text-sm text-slate-300 space-y-5">
-                            <section>
-                                <h4 class="text-white font-bold uppercase text-xs">1. The "Convenience" Tax at Arrivals</h4>
-                                <p>Exchange kiosks at airport arrivals (Travelex, Global Blue) are the most expensive places on earth to get cash. You will often lose **12-15%** of your value through a combination of bad rates and "zero commission" lies.</p>
-                            </section>
-                            <section>
-                                <h4 class="text-white font-bold uppercase text-xs">2. Airport & Cruise Port ATMs</h4>
-                                <p>ATMs located inside the terminal or right at the cruise pier are often "Private" (like Euronet). These machines have two ways of taking your money:
-                                    <ul class="list-disc pl-5 mt-2 space-y-1 text-slate-400 italic">
-                                        <li>High flat-rate usage fees ($5-$10 per pull).</li>
-                                        <li>"Suggested" conversion rates that are 10% worse than the bank rate.</li>
-                                    </ul>
-                                </p>
-                            </section>
-                            <section>
-                                <h4 class="text-white font-bold uppercase text-xs">3. The 2026 Strategy</h4>
-                                <p>Carry $100 in local cash for emergencies, but use a credit card with <strong>No Foreign Transaction Fees</strong> for 90% of purchases. If you MUST use an ATM, walk two blocks away from the airport or port to find a "Big Brand" local bank machine.</p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        function showTab(type) {
-            document.getElementById('pan-c').style.display = type === 'c' ? 'block' : 'none';
-            document.getElementById('pan-a').style.display = type === 'a' ? 'block' : 'none';
-            document.getElementById('btn-c').className = type === 'c' ? 'tab-btn active' : 'tab-btn';
-            document.getElementById('btn-a').className = type === 'a' ? 'tab-btn active' : 'tab-btn';
-        }
-        function runConvert() {
-            const from = parseFloat(document.getElementById('from_val').value);
-            const to = parseFloat(document.getElementById('to_val').value);
-            const res = (100 / from) * to * 0.96; 
-            document.getElementById('curr_output').style.display = 'block';
-            document.getElementById('final_amt').innerText = res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        }
-    </script>
-</body>
-</html>
+                            <option value="1">USD (US Dollar)</option>
+                            <option value="0.79">GBP (British Pound)</option>
+                            <option value="1.36">CAD (Canadian Dollar)</option>
+                            <option value="155.5">JPY (Japanese Yen)</option>
+                            <option value="17.1">MXN (Mexican Peso)</option>
+                            <option value="1.52">AUD (Australian Dollar)</option>
+                            <option value="1.35">SGD (Singapore Dollar)</option>
+                            <option value="1.0">BSD (Bahamian Dollar)</option>
+                            <option value="11.0">NOK (Norwegian Krone)</option
