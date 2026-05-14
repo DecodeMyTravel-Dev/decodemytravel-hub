@@ -20,9 +20,11 @@
 </head>
 <body class="bg-slate-950 text-white min-h-screen p-4 md:p-10 font-sans">
 
+    <div class="text-[8px] text-slate-800 uppercase font-bold text-center mb-2">Build Version: 5.0.MASTER</div>
+
     <header class="max-w-7xl mx-auto mb-10 text-center border-b border-slate-900 pb-8">
         <h1 class="text-5xl font-black text-cyan-400 uppercase tracking-tighter italic">DECODE MY TRAVEL</h1>
-        <div class="mt-6">
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
             <a href="currency.html" class="bg-cyan-500 text-slate-950 px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition inline-block shadow-lg shadow-cyan-500/20">
                 Open Currency & Airport Manual →
             </a>
@@ -32,21 +34,22 @@
     <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <div class="lg:col-span-5 space-y-6">
+            
             <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
                 <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] italic tracking-widest">Drink Package Decoder</h2>
                 <div class="space-y-4">
                     <label class="block text-[10px] text-slate-500 uppercase font-bold">Package Cost / Day ($)</label>
                     <input type="number" id="pkg_price" value="75" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="avg_cocktail" value="14" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700">
-                        <input type="number" id="avg_beer" value="8" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700">
+                        <div><label class="text-[8px] text-slate-500 uppercase">Avg Cocktail $</label><input type="number" id="avg_cocktail" value="14" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700"></div>
+                        <div><label class="text-[8px] text-slate-500 uppercase">Avg Beer $</label><input type="number" id="avg_beer" value="8" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700"></div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="qty_cocktails" value="4" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700">
-                        <input type="number" id="qty_beers" value="2" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700">
+                        <div><label class="text-[8px] text-slate-500 uppercase">Qty Cocktails</label><input type="number" id="qty_cocktails" value="4" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700"></div>
+                        <div><label class="text-[8px] text-slate-500 uppercase">Qty Beers</label><input type="number" id="qty_beers" value="2" class="w-full bg-slate-800 p-4 rounded-xl outline-none border border-slate-700"></div>
                     </div>
                     <button onclick="doDrinks()" class="w-full bg-cyan-500 text-slate-950 font-black py-4 rounded-xl uppercase">Analyze Value</button>
-                    <div id="res_drinks" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center font-bold"></div>
+                    <div id="res_drinks" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center font-bold border border-slate-800"></div>
                 </div>
             </section>
 
@@ -59,6 +62,18 @@
                 <button onclick="doBags()" class="w-full bg-slate-700 font-bold py-4 rounded-xl uppercase">Convert</button>
                 <div id="res_bags" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center text-cyan-400 font-mono text-xl border border-slate-800"></div>
             </section>
+
+            <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
+                <h2 class="text-cyan-400 font-bold mb-4 uppercase text-[11px] italic tracking-widest">Tipping Compass</h2>
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c1" data-t="🇲🇽 <strong>MEXICO:</strong> 10-15% for guides. USD $1 bills are king. Look for 'Servicio Incluido' or 'Propina'."><label for="c1" class="chip-label">MEXICO</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c2" data-t="🇧🇸 <strong>BAHAMAS:</strong> 15% service charge usually included in Nassau restaurants."><label for="c2" class="chip-label">BAHAMAS</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c3" data-t="🇰🇳 <strong>CARIBBEAN:</strong> Standard 15% for taxi tours unless noted."><label for="c3" class="chip-label">CARIBBEAN</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c4" data-t="🇪🇺 <strong>EUROPE:</strong> Modest tipping. €1-2 for drinks; €5 for dinner."><label for="c4" class="chip-label">EUROPE</label></div>
+                </div>
+                <button onclick="doTips()" class="w-full bg-cyan-500 text-slate-950 font-black py-4 rounded-xl uppercase">Generate Tips Sheet</button>
+                <div id="res_tips" style="display:none;" class="mt-4 p-5 bg-slate-950 rounded-xl text-xs space-y-2 text-slate-300 border border-slate-800"></div>
+            </section>
         </div>
 
         <div class="lg:col-span-7">
@@ -66,14 +81,13 @@
                 <div class="flex">
                     <button id="b1" onclick="tab('drink')" class="tab-btn active">Drink Index</button>
                     <button id="b2" onclick="tab('bag')" class="tab-btn">Baggage Manual</button>
-                    <button id="b3" onclick="tab('tip')" class="tab-btn">Tipping Guide</button>
+                    <button id="b3" onclick="tab('tip')" class="tab-btn">Full Tipping Manual</button>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto custom-scroll text-sm text-slate-300 leading-relaxed">
                     
                     <div id="p1" style="display:block;">
-                        <h3 class="text-cyan-400 font-black text-xl mb-4 uppercase italic border-b border-slate-800 pb-2">Cruise Drink Decoder: The 2026 Price Index</h3>
-                        <p class="mb-4"><strong>1. A La Carte Pricing (May 2026 Fleet Averages)</strong><br>Choosing to "Pay as You Go" requires tracking the 20% "hidden tax" (automatic gratuity) applied on most lines. Below is the current market rate for single servings.</p>
-                        
+                        <h3 class="text-cyan-400 font-black text-xl mb-4 uppercase italic border-b border-slate-800 pb-2">Cruise Drink Decoder: 2026 Price Index</h3>
+                        <p class="mb-4"><strong>1. A La Carte Pricing (May 2026 Fleet Averages)</strong><br>Choosing to "Pay as You Go" requires tracking the 20% "hidden tax" (automatic gratuity) applied on most lines.</p>
                         <table>
                             <thead><tr><th>Cruise Line</th><th>Cocktail Avg</th><th>Beer Avg</th><th>Wine (Glass)</th><th>Automatic Tip</th></tr></thead>
                             <tbody>
@@ -86,55 +100,37 @@
                                 <tr><td>Cunard</td><td>$13 – $18</td><td>$9 – $11</td><td>$12 – $18</td><td>15%</td></tr>
                             </tbody>
                         </table>
-
-                        <p class="mb-4"><strong>2. High-End "Top Tier" Packages (The "All-In" Cost)</strong><br>When evaluating the decoder results, compare them against these 2026 daily rates for the most inclusive alcoholic packages.</p>
+                        <p class="mt-6 mb-2 font-bold text-white uppercase text-xs">2. High-End "Top Tier" Packages (All-In Daily Rates)</p>
                         <ul class="list-disc pl-5 space-y-2 mb-6">
-                            <li><strong>Princess Premier:</strong> $100 - 105/day (Includes Crew Appreciation gratuities, Wi-Fi, Unlimited Specialty Dinners, plus other perks).</li>
-                            <li><strong>Celebrity Premium:</strong> $85 – $105/day (Covers drinks up to $17).</li>
-                            <li><strong>Carnival Cheers!:</strong> $71.94 – $83.94/day (Pre-purchase vs. Onboard price).</li>
-                            <li><strong>NCL "Free at Sea Plus":</strong> ~$128/day (Upgrade cost from standard promo).</li>
-                            <li><strong>Royal Caribbean Deluxe:</strong> $75 – $115/day (Highly dynamic pricing).</li>
-                            <li><strong>Cunard Premium:</strong> $75 – $85/day (Includes specialized coffees and waters).</li>
+                            <li>Princess Premier: $100 - 105/day (Inc. Tips, Wi-Fi, Specialty Dining).</li>
+                            <li>Celebrity Premium: $85 – $105/day (Covers drinks up to $17).</li>
+                            <li>Carnival Cheers!: $71.94 – $83.94/day (Pre-purchase vs. Onboard).</li>
+                            <li>NCL "Free at Sea Plus": ~$128/day (Upgrade cost).</li>
+                            <li>Royal Caribbean Deluxe: $75 – $115/day (Dynamic Pricing).</li>
+                            <li>Cunard Premium: $75 – $85/day (Inc. Coffees/Waters).</li>
                         </ul>
-
-                        <p class="mb-2"><strong>3. Decoder Logic & Assumptions</strong></p>
-                        <ul class="list-disc pl-5 space-y-1 mb-6">
-                            <li><strong>Pricing:</strong> We are assuming $14 drinks and $8 beer.</li>
-                            <li><strong>The Gratuity Factor:</strong> We add 20% to your a la carte total automatically. If you spend $100 at the bar, our tool knows your bill is actually $120.</li>
-                            <li><strong>The Port Day Penalty:</strong> The decoder assumes a daily average. if you are on long port hours, your "window" to drink on the ship is smaller.</li>
-                            <li><strong>Included Value:</strong> For Princess, where the package includes crew appreciation (tips), the "Package" side of the math is significantly more favorable.</li>
-                        </ul>
+                        <p class="font-bold text-white uppercase text-xs">3. Decoder Logic & Assumptions</p>
+                        <p> tool assumes $14 cocktails / $8 beer + 20% auto-tip. Note the "Port Day Penalty": long hours ashore reduce package value.</p>
                     </div>
 
                     <div id="p2" style="display:none;">
-                        <h3 class="text-cyan-400 font-black text-xl mb-4 uppercase italic border-b border-slate-800 pb-2">Baggage Considerations</h3>
-                        <p class="mb-2"><strong>1. The Standard for the "Big Three", and many other national and International Airlines</strong><br>American Airlines, Delta Airlines, United Airlines. In 2026, the "Standard" has moved to Volumetric Compliance. If your bag doesn't slide into the automated metal sizer without a shove, it's a gate-check.</p>
-                        <ul class="list-disc pl-5 space-y-2 mb-6">
-                            <li><strong>Personal Item:</strong> 17 x 10 x 9 inches. Must fit entirely under the seat. <span class="italic text-cyan-400">Tip: Basic Economy passengers are often restricted exclusively to this item.</span></li>
-                            <li><strong>Carry-On:</strong> 22 x 14 x 9 inches. Must include wheels and handles in your measurement.</li>
-                            <li><strong>Checked Bag (Economy):</strong> 50 lbs (23 kg) limit. Fees now average $45–$50 for the first bag if not prepaid.</li>
-                            <li><strong>Checked Bag (First/Business):</strong> 70 lbs (32 kg) limit. Most premium tickets include 2-3 bags at this weight for free.</li>
+                        <h3 class="text-cyan-400 font-black text-xl mb-4 uppercase italic border-b border-slate-800 pb-2">Baggage Considerations: 2026 Manual</h3>
+                        <p><strong>1. The Standard for the "Big Three" (American, Delta, United)</strong><br>Standard has moved to <strong>Volumetric Compliance</strong>. If it doesn't slide into the sizer without a shove, it's a gate-check.</p>
+                        <ul class="list-disc pl-5 my-4 space-y-2">
+                            <li><strong>Personal Item:</strong> 17x10x9in. Must fit under the seat. (Basic Economy restricted to ONLY this).</li>
+                            <li><strong>Carry-On:</strong> 22x14x9in. Must include wheels and handles.</li>
+                            <li><strong>Checked Bag (Economy):</strong> 50 lbs (23 kg). Fees average $45-$50.</li>
+                            <li><strong>Checked Bag (First/Business):</strong> 70 lbs (32 kg).</li>
                         </ul>
-
-                        <p class="mb-2"><strong>2. Regional Airlines</strong><br>Traveling outside the major hubs requires extreme caution.</p>
-                        <ul class="list-disc pl-5 space-y-2 mb-6">
-                            <li><strong>Weight Sensitivity:</strong> international regional carriers often cap carry-ons at 15–22 lbs (7–10 kg). If you are over, they will move it to the hold.</li>
-                            <li><strong>The Regional Rule:</strong> Many Regional carriers (as of 2026) allow only 10kg for Economy and 12kg for Business for carry-ons. Anything over is charged per kilo at the counter.</li>
-                        </ul>
-
-                        <p class="mb-2"><strong>3. Surcharges & The 2026 "Fuel Factor"</strong></p>
-                        <ul class="list-disc pl-5 mb-6 space-y-2">
-                            <li><strong>Overweight Fees:</strong> Crossing the 50 lb. mark in Economy is expensive. Most airlines now charge a flat $100–$200 surcharge for bags between 51 and 70 lbs.</li>
-                            <li><strong>Fuel Disclaimers:</strong> Many 2026 tickets now include a "Variable Fuel Surcharge" (YQ/YR codes). Some regional carriers may apply an additional $10–$25 "Security & Fuel Handling" fee per checked bag at the counter.</li>
-                        </ul>
-                        <p class="italic text-[10px] text-slate-500">Provided as a best estimate. Consult your carrier’s website for current limits and pricing.</p>
+                        <p><strong>2. Regional Airlines</strong><br>Carry-on caps of 15–22 lbs (7–10 kg). Overages charged per kilo.</p>
+                        <p><strong>3. Surcharges & Fuel Factors</strong><br>Fuel Surcharge (YQ/YR codes) and $10-$25 "Security & Fuel Handling" fees common on regional hops.</p>
                     </div>
 
                     <div id="p3" style="display:none;">
                         <h3 class="text-cyan-400 font-black text-xl mb-4 uppercase italic border-b border-slate-800 pb-2">The Global Tipping Manual (2026)</h3>
                         <p class="mb-4"><strong>1. The "Automatic" Trap:</strong> 2026 Auto-Gratuity ($18-$20/day) covers room/dining staff, but NOT shore excursion guides.</p>
                         <p class="mb-4"><strong>2. Shore Excursion Etiquette:</strong> Drivers: $2-$5 per person. Specialist Guides: $10-$20. Private Drivers: 10-15% of cost.</p>
-                        <p class="mb-4"><strong>3. Port Intelligence:</strong> Look for "Servicio Incluido" or "Propina" on your bill before adding extra. USD $1 bills are essential for small tips in the Caribbean and Bahamas.</p>
+                        <p class="mb-4"><strong>3. Port Intelligence:</strong> Look for "Servicio Incluido" or "Propina" on Mexican bills. USD $1 bills are king in Caribbean/Bahamas ports.</p>
                     </div>
 
                 </div>
