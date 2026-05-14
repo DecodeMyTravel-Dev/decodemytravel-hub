@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decode My Travel | POC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white font-sans min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl max-w-md w-full">
+        <h1 class="text-2xl font-black text-cyan-400 mb-2 tracking-tight">DECODE MY TRAVEL</h1>
+        <p class="text-slate-400 text-sm mb-6 uppercase tracking-widest font-bold">Tool 01: Drink Package Logic</p>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Daily Package Cost ($)</label>
+                <input type="number" id="pkgPrice" value="75" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-2 focus:ring-cyan-500 outline-none transition">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Cocktails/Spirits</label>
+                    <input type="number" id="qtyCocktails" value="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Beers</label>
+                    <input type="number" id="qtyBeers" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3">
+                </div>
+            </div>
+
+            <button onclick="decode()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-black py-4 rounded-xl transition-all transform hover:scale-[1.02] active:scale-95">
+                DECODE VALUE
+            </button>
+
+            <div id="result" class="hidden mt-6 p-4 rounded-xl bg-slate-950 border border-slate-800 animate-in fade-in duration-500">
+                <p id="outcome" class="text-xl font-black text-center mb-1"></p>
+                <p id="details" class="text-sm text-slate-400 text-center"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function decode() {
+            const price = parseFloat(document.getElementById('pkgPrice').value);
+            const cocktails = parseInt(document.getElementById('qtyCocktails').value) * 14;
+            const beers = parseInt(document.getElementById('qtyBeers').value) * 8;
+            
+            // Adding 20% auto-gratuity to the a-la-carte comparison
+            const realValue = (cocktails + beers) * 1.20;
+            const diff = Math.abs(realValue - price).toFixed(2);
+            
+            const resDiv = document.getElementById('result');
+            resDiv.classList.remove('hidden');
+            
+            if (realValue >= price) {
+                document.getElementById('outcome').innerText = "✅ WORTH IT";
+                document.getElementById('outcome').className = "text-xl font-black text-center mb-1 text-green-400";
+                document.getElementById('details').innerText = "You save approximately $" + diff + " per day.";
+            } else {
+                document.getElementById('outcome').innerText = "❌ NOT WORTH IT";
+                document.getElementById('outcome').className = "text-xl font-black text-center mb-1 text-red-500";
+                document.getElementById('details').innerText = "You lose approximately $" + diff + " per day.";
+            }
+        }
+    </script>
+</body>
+</html>
