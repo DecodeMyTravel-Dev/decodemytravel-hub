@@ -11,7 +11,7 @@
         .custom-scroll::-webkit-scrollbar-thumb { background: #22d3ee; border-radius: 10px; }
         .tab-active { border-bottom: 2px solid #22d3ee; color: #22d3ee !important; font-weight: 900; }
         .chip-checkbox { display: none; }
-        .chip-label { cursor: pointer; transition: all 0.2s; border: 1px solid #334155; display: flex; align-items: center; justify-content: center; height: 3rem; border-radius: 0.75rem; font-size: 0.65rem; text-align: center; padding: 0.5rem; line-height: 1.1; }
+        .chip-label { cursor: pointer; border: 1px solid #334155; display: flex; align-items: center; justify-content: center; height: 3rem; border-radius: 0.75rem; font-size: 0.7rem; text-align: center; }
         .chip-checkbox:checked + .chip-label { background-color: #06b6d4; border-color: #06b6d4; color: #0f172a; font-weight: 900; }
     </style>
 </head>
@@ -19,77 +19,114 @@
 
     <header class="max-w-7xl mx-auto mb-10 text-center">
         <h1 class="text-4xl font-black text-cyan-400 tracking-tighter uppercase">Decode My Travel</h1>
-        <p class="text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mt-2 italic">Intelligence for 2026 Travelers</p>
+        <p class="text-slate-500 text-xs font-bold uppercase mt-2 tracking-widest">Intelligence for 2026 Travelers</p>
     </header>
 
     <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         <div class="lg:col-span-5 space-y-6">
+            
             <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl">
-                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] tracking-widest italic">Drink Package Decoder</h2>
+                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] italic tracking-widest">Drink Package Decoder</h2>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-[10px] text-slate-500 font-black uppercase mb-1">Daily Package Cost ($)</label>
+                        <label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">Package Cost / Day ($)</label>
                         <input type="number" id="pkgPrice" value="75" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-[10px] text-slate-500 font-black uppercase mb-1">Avg Cocktail $</label><input type="number" id="avgCocktail" value="14" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
-                        <div><label class="block text-[10px] text-slate-500 font-black uppercase mb-1">Avg Beer $</label><input type="number" id="avgBeer" value="8" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
+                        <div><label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">Avg Cocktail $</label><input type="number" id="avgCocktail" value="14" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
+                        <div><label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">Avg Beer $</label><input type="number" id="avgBeer" value="8" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-[10px] text-slate-500 font-black uppercase mb-1">Cocktails / Day</label><input type="number" id="qtyCocktails" value="4" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
-                        <div><label class="block text-[10px] text-slate-500 font-black uppercase mb-1">Beers / Day</label><input type="number" id="qtyBeers" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
+                        <div><label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">Cocktails / Day</label><input type="number" id="qtyCocktails" value="4" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
+                        <div><label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">Beers / Day</label><input type="number" id="qtyBeers" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none"></div>
                     </div>
-                    <button onclick="decodeDrinks()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl text-sm uppercase hover:bg-cyan-400 transition">Analyze Value</button>
-                    <div id="drinkRes" class="hidden p-4 bg-slate-950 rounded-xl border border-slate-800 text-center font-bold text-lg"></div>
+                    <button onclick="runDrinkDecoder()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl text-sm uppercase hover:bg-cyan-400 transition">Analyze Value</button>
+                    <div id="drinkResDisplay" class="hidden mt-4 p-4 bg-slate-950 rounded-xl border border-slate-800 text-center font-bold text-lg"></div>
                 </div>
             </section>
 
             <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl">
-                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] tracking-widest italic">Baggage Weight Converter</h2>
+                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] italic tracking-widest">Baggage Weight Converter</h2>
                 <div class="space-y-4">
                     <div class="flex gap-2">
-                        <input type="number" id="weightInput" value="50" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none">
-                        <select id="unit" class="bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm font-bold text-cyan-400 uppercase">
+                        <input type="number" id="weightVal" value="50" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm outline-none">
+                        <select id="weightUnit" class="bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm font-bold text-cyan-400 uppercase">
                             <option value="lb">LB</option>
                             <option value="kg">KG</option>
                         </select>
                     </div>
-                    <button onclick="convertWeight()" class="w-full bg-slate-700 text-white font-bold py-4 rounded-xl text-sm uppercase hover:bg-slate-600 transition">Convert</button>
-                    <div id="weightRes" class="hidden p-4 bg-slate-950 rounded-xl border border-slate-800 text-center font-mono text-cyan-400 text-xl"></div>
+                    <button onclick="runWeightConverter()" class="w-full bg-slate-700 text-white font-bold py-4 rounded-xl text-sm uppercase hover:bg-slate-600 transition">Convert</button>
+                    <div id="weightResDisplay" class="hidden mt-4 p-4 bg-slate-950 rounded-xl border border-slate-800 text-center font-mono text-cyan-400 text-xl"></div>
                 </div>
             </section>
 
             <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl">
-                <h2 class="text-cyan-400 font-bold mb-4 uppercase text-[11px] tracking-widest italic">Tipping Etiquette Compass</h2>
+                <h2 class="text-cyan-400 font-bold mb-4 uppercase text-[11px] italic tracking-widest">Tipping Etiquette Compass</h2>
                 <div class="grid grid-cols-2 gap-2 mb-6">
-                    <div><input type="checkbox" class="region-check chip-checkbox" id="mxl" data-tip="🇲🇽 <strong>MEXICO:</strong> 10-15% for guides. USD $1 bills are king. Check for 'Propina' line item."><label for="mxl" class="chip-label">MEXICO</label></div>
-                    <div><input type="checkbox" class="region-check chip-checkbox" id="bhl" data-tip="🇧🇸 <strong>BAHAMAS:</strong> 15% service charge usually included in Nassau. $2-5 per bag for porters."><label for="bhl" class="chip-label">BAHAMAS</label></div>
-                    <div><input type="checkbox" class="region-check chip-checkbox" id="crl" data-tip="🇰🇳 <strong>CARIBBEAN:</strong> Standard 15% for taxi tours unless 'Service Included' is noted on receipt."><label for="crl" class="chip-label">CARIBBEAN</label></div>
-                    <div><input type="checkbox" class="region-check chip-checkbox" id="eul" data-tip="🇪🇺 <strong>EUROPE:</strong> Modest tipping. €1-2 for drinks; €5 for dinner. Taxi tipping not expected."><label for="eul" class="chip-label">EUROPE</label></div>
+                    <div><input type="checkbox" class="tip-check chip-checkbox" id="t-mex" data-tip="🇲🇽 <strong>MEXICO:</strong> 10-15% for guides. USD $1 bills are king. Check for 'Propina' line item."><label for="t-mex" class="chip-label">MEXICO</label></div>
+                    <div><input type="checkbox" class="tip-check chip-checkbox" id="t-bah" data-tip="🇧🇸 <strong>BAHAMAS:</strong> 15% service charge usually included in Nassau. $2-5 per bag for porters."><label for="t-bah" class="chip-label">BAHAMAS</label></div>
+                    <div><input type="checkbox" class="tip-check chip-checkbox" id="t-car" data-tip="🇰🇳 <strong>CARIBBEAN:</strong> Standard 15% for taxi tours unless 'Service Included' is noted on receipt."><label for="t-car" class="chip-label">CARIBBEAN</label></div>
+                    <div><input type="checkbox" class="tip-check chip-checkbox" id="t-eur" data-tip="🇪🇺 <strong>EUROPE:</strong> Modest tipping. €1-2 for drinks; €5 for dinner. Taxi tipping not expected."><label for="t-eur" class="chip-label">EUROPE</label></div>
                 </div>
-                <button onclick="decodeTips()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl text-sm uppercase hover:bg-cyan-400 transition">Generate Tips Sheet</button>
-                <div id="tipRes" class="hidden mt-4 p-5 bg-slate-950 rounded-xl border border-slate-800 space-y-4 text-[11px] text-slate-300"></div>
+                <button onclick="runTipGenerator()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl text-sm uppercase hover:bg-cyan-400 transition">Generate Tips Sheet</button>
+                <div id="tipResDisplay" class="hidden mt-4 p-5 bg-slate-950 rounded-xl border border-slate-800 space-y-4 text-[11px] text-slate-300 leading-relaxed"></div>
             </section>
         </div>
 
         <div class="lg:col-span-7">
             <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl h-full flex flex-col min-h-[900px] overflow-hidden">
+                
                 <div class="flex border-b border-slate-800 bg-slate-950/50">
-                    <button onclick="showTab('drink-tab')" id="btn-drink-tab" class="flex-1 py-5 text-[10px] font-black uppercase tracking-widest tab-active text-cyan-400">Drink Price Index</button>
-                    <button onclick="showTab('bag-tab')" id="btn-bag-tab" class="flex-1 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500">Baggage Manual</button>
+                    <button onclick="toggleTab('tab-drinks')" id="btn-drinks" class="flex-1 py-5 text-[10px] font-black uppercase tracking-widest tab-active">Drink Price Index</button>
+                    <button onclick="toggleTab('tab-bags')" id="btn-bags" class="flex-1 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500">Baggage Manual</button>
                 </div>
+
                 <div class="p-8 custom-scroll overflow-y-auto flex-1">
                     
-                    <div id="drink-tab" class="space-y-6">
+                    <div id="tab-drinks" class="space-y-6">
                         <h3 class="text-white font-black text-xl uppercase italic border-b border-slate-800 pb-2">Cruise Drink Decoder: The 2026 Price Index</h3>
                         <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
                             <p><strong>1. A La Carte Pricing (May 2026 Fleet Averages)</strong><br>Choosing to "Pay as You Go" requires tracking the 20% "hidden tax" (automatic gratuity) applied on most lines. Below is the current market rate for single servings.</p>
-                            <div class="overflow-x-auto rounded-xl border border-slate-800">
-                                <table class="w-full text-[11px] text-left">
-                                    <thead class="bg-slate-800 text-cyan-400 uppercase">
-                                        <tr><th class="p-3">Cruise Line</th><th class="p-3">Cocktail Avg</th><th class="p-3">Beer Avg</th><th class="p-3">Wine (Glass)</th><th class="p-3">Auto Tip</th></tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-slate-800 bg-slate-950/50 italic">
-                                        <tr><td class="p-3 text-white">Princess</td><td>$12 – $15</td><td>$7.50 – $9</td><td>$10 – $14</td><td>20%</td></tr>
-                                        <tr><td class="p-3 text-white">Royal Caribbean</td><td>$14 – $
+                            
+                            <table class="w-full text-[11px] text-left border border-slate-800 rounded-xl overflow-hidden">
+                                <thead class="bg-slate-800 text-cyan-400 uppercase">
+                                    <tr><th class="p-3">Line</th><th class="p-3">Cocktail</th><th class="p-3">Beer</th><th class="p-3">Wine</th><th class="p-3">Tip</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-800 bg-slate-950/50 italic">
+                                    <tr><td class="p-3 text-white">Princess</td><td>$12 – $15</td><td>$7.50 – $9</td><td>$10 – $14</td><td>20%</td></tr>
+                                    <tr><td class="p-3 text-white">Royal Caribbean</td><td>$14 – $16</td><td>$8 – $10</td><td>$12 – $18</td><td>18%</td></tr>
+                                    <tr><td class="p-3 text-white">Carnival</td><td>$12 – $15</td><td>$7.50 – $9</td><td>$10 – $15</td><td>20%</td></tr>
+                                    <tr><td class="p-3 text-white">Celebrity</td><td>$15 – $20</td><td>$9 – $12</td><td>$12 – $20</td><td>20%</td></tr>
+                                    <tr><td class="p-3 text-white">NCL (Norwegian)</td><td>$15 – $22</td><td>$8 – $13</td><td>$13 – $22</td><td>20%</td></tr>
+                                    <tr><td class="p-3 text-white">Holland America</td><td>$13 – $16</td><td>$8 – $10</td><td>$11 – $15</td><td>20% (June)</td></tr>
+                                    <tr><td class="p-3 text-white">Cunard</td><td>$13 – $18</td><td>$9 – $11</td><td>$12 – $18</td><td>15%</td></tr>
+                                </tbody>
+                            </table>
+
+                            <p><strong>2. High-End "Top Tier" Packages (The "All-In" Cost)</strong><br>Compare decoder results against these 2026 daily rates for the most inclusive alcoholic packages. Note that prices often fluctuate based on sailing date.</p>
+                            <ul class="space-y-3 text-xs bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <li><strong>Princess Premier:</strong> $100 - 105/day (Includes Crew Appreciation gratuities, Wi-Fi, Unlimited Specialty Dinners).</li>
+                                <li><strong>Celebrity Premium:</strong> $85 – $105/day (Covers drinks up to $17).</li>
+                                <li><strong>Carnival Cheers!:</strong> $71.94 – $83.94/day (Pre-purchase price).</li>
+                                <li><strong>NCL "Free at Sea Plus":</strong> ~$128/day.</li>
+                                <li><strong>Royal Caribbean Deluxe:</strong> $75 – $115/day (Highly dynamic pricing).</li>
+                            </ul>
+
+                            <p><strong>3. Decoder Logic & Assumptions</strong><br>To give you a best estimate breakeven point, this tool utilizes the following 2026 benchmarks: Pricing ($14 cocktails/$8 beer); 20% automatic gratuity; and "Included Value" like Princess including tips.</p>
+                            
+                            <p class="font-bold text-xs pt-4 border-t border-slate-800 text-center italic">Pre-paying locks in your price. Waiting for onboard purchase may incur surcharges.</p>
+                        </div>
+                    </div>
+
+                    <div id="tab-bags" class="hidden space-y-6">
+                        <h3 class="text-white font-black text-xl uppercase italic border-b border-slate-800 pb-2">Baggage Considerations: The 2026 Manual</h3>
+                        <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+                            <p><strong>1. Standard for Major Carriers (AA, Delta, United)</strong><br>In 2026, the standard is <strong>Volumetric Compliance</strong>. If it doesn't fit the automated sizer, it's a gate-check.</p>
+                            <ul class="space-y-3 text-[11px] bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <li><strong>Personal Item:</strong> 17 x 10 x 9 inches. Must fit under seat.</li>
+                                <li><strong>Carry-On:</strong> 22 x 14 x 9 inches. Includes wheels and handles.</li>
+                                <li><strong>Checked (Economy):</strong> 50 lbs (23 kg). Fees average $45-$50.</li>
+                                <li><strong>Checked (First/Business):</strong> 70 lbs (32 kg).</li>
+                            </ul>
+                            <p><strong>2. Regional Airlines</strong><br>Extreme weight sensitivity is common. Regional carriers often cap carry-ons at 15–22 lbs (7–1
