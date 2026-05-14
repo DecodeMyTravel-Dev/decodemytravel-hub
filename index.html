@@ -3,65 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decode My Travel | Hub</title>
+    <title>Decode My Travel | Logistics Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
 </head>
-<body class="bg-slate-950 text-white font-sans min-h-screen p-4">
+<body class="bg-slate-950 text-white font-sans min-h-screen p-4 md:p-8">
 
     <header class="max-w-4xl mx-auto mb-8 text-center pt-8">
         <h1 class="text-3xl font-black text-cyan-400 tracking-tighter uppercase">Decode My Travel</h1>
-        <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1 italic">Logistics Hub v1.1 // May 2026</p>
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Universal Logistics Hub // 2026 Edition</p>
     </header>
 
-    <main class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+    <main class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col h-full">
             <h2 class="text-cyan-400 font-bold mb-4 uppercase text-sm italic">// 01. Drink Decoder</h2>
-            <div class="space-y-4">
-                <input type="number" id="pkgPrice" value="75" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm outline-none">
-                <div class="grid grid-cols-2 gap-3">
-                    <input type="number" id="qtyCocktails" value="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm">
-                    <input type="number" id="qtyBeers" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm">
+            <div class="space-y-4 mb-6">
+                <div class="grid grid-cols-1 gap-4">
+                    <input type="number" id="pkgPrice" value="75" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm outline-none">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="number" id="qtyCocktails" value="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm">
+                        <input type="number" id="qtyBeers" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm">
+                    </div>
                 </div>
                 <button onclick="decodeDrinks()" class="w-full bg-cyan-500 text-slate-900 font-black py-3 rounded-lg text-sm uppercase">Decode Value</button>
-                <div id="drinkRes" class="hidden p-3 bg-slate-950 rounded-lg border border-slate-800 text-center">
-                    <p id="drinkOutcome" class="font-bold text-lg text-green-400"></p>
-                </div>
+                <div id="drinkRes" class="hidden p-3 bg-slate-950 rounded-lg border border-slate-800 text-center font-bold text-lg"></div>
             </div>
         </section>
 
-        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col">
             <h2 class="text-cyan-400 font-bold mb-4 uppercase text-sm italic">// 02. Baggage Shield</h2>
             <div class="space-y-4">
                 <div class="flex gap-2">
                     <input type="number" id="weightInput" value="50" class="flex-1 bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm outline-none">
-                    <select id="unit" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm font-bold text-cyan-400">
+                    <select id="unit" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm font-bold text-cyan-400 uppercase">
                         <option value="lb">LB</option>
                         <option value="kg">KG</option>
                     </select>
                 </div>
-                <button onclick="convertWeight()" class="w-full bg-slate-700 text-white font-bold py-3 rounded-lg text-sm uppercase">Convert</button>
+                <button onclick="convertWeight()" class="w-full bg-slate-700 text-white font-bold py-3 rounded-lg text-sm uppercase italic tracking-widest">Quick Convert</button>
                 <div id="weightRes" class="hidden p-3 bg-slate-950 rounded-lg border border-slate-800 text-center font-mono text-cyan-400 text-lg"></div>
+                
+                <details class="group border-t border-slate-800 pt-4 cursor-pointer">
+                    <summary class="flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-cyan-400 transition">
+                        Baggage Considerations (2026)
+                        <span class="group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="mt-4 text-[11px] text-slate-300 space-y-4 leading-relaxed font-light">
+                        <div>
+                            <p class="text-cyan-400 font-bold mb-1">1. MAJOR CARRIERS (AA, DELTA, UNITED)</p>
+                            <p><strong>Standard:</strong> Strictly Volumetric. Personal Item (17x10x9in) must fit under seat. Carry-on (22x14x9in) must include wheels/handles. Checked (Economy) capped at 50 lbs (23 kg) with fees averaging $45-50.</p>
+                            <p class="mt-1"><strong>First/Business:</strong> 70 lbs (32 kg) limit. Most premium tickets include 2-3 bags free.</p>
+                        </div>
+                        <div>
+                            <p class="text-cyan-400 font-bold mb-1">2. REGIONAL AIRLINES</p>
+                            <p>Extreme weight sensitivity is common. Regional carriers often cap carry-ons at 15–22 lbs (7–10 kg). Excess is moved to hold at the jet bridge.</p>
+                        </div>
+                        <div>
+                            <p class="text-cyan-400 font-bold mb-1">3. SURCHARGES & FUEL</p>
+                            <p>Overweight Economy bags (51-70 lbs) trigger flat $100–$200 surcharges. Note the "Variable Fuel Surcharge" (YQ/YR codes); regional carriers may apply extra $10–$25 fees at the counter.</p>
+                        </div>
+                        <p class="text-[9px] text-slate-500 italic mt-4 border-t border-slate-800 pt-2">Estimates provided for planning. Consult carrier website 72h before flying for latest DOT/IATA adjustments.</p>
+                    </div>
+                </details>
             </div>
         </section>
 
         <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl md:col-span-2">
             <h2 class="text-cyan-400 font-bold mb-4 uppercase text-sm italic">// 03. Tipping Compass</h2>
             <div class="space-y-4">
-                <select id="portSelect" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white">
+                <select id="portSelect" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white outline-none appearance-none">
                     <option value="" disabled selected>Select Destination</option>
                     <option value="mexico">Mexico (Cozumel/Costa Maya)</option>
                     <option value="bahamas">The Bahamas (Nassau/CocoCay)</option>
                     <option value="europe">Western Europe (Spain/Italy)</option>
                 </select>
                 <button onclick="decodeTips()" class="w-full bg-cyan-500 text-slate-900 font-black py-3 rounded-lg text-sm uppercase">Decode Etiquette</button>
-                <div id="tipRes" class="hidden p-4 bg-slate-950 rounded-lg border border-slate-800">
+                <div id="tipRes" class="hidden p-4 bg-slate-950 rounded-lg border border-slate-800 animate-pulse-once">
                     <p id="tipOutcome" class="text-xs leading-relaxed text-slate-300"></p>
                 </div>
             </div>
         </section>
 
     </main>
+
+    <footer class="max-w-4xl mx-auto mt-12 text-center text-slate-700 pb-10 border-t border-slate-900 pt-6">
+        <p class="text-[9px] uppercase tracking-[0.2em] font-bold">© 2026 DECODE MY TRAVEL // ALL RIGHTS RESERVED</p>
+    </footer>
 
     <script>
         function decodeDrinks() {
@@ -70,14 +102,13 @@
             const b = (parseInt(document.getElementById('qtyBeers').value) || 0) * 8;
             const totalWithTip = (c + b) * 1.20; 
             const res = document.getElementById('drinkRes');
-            const out = document.getElementById('drinkOutcome');
             res.classList.remove('hidden');
             if (totalWithTip >= pkg) {
-                out.innerText = "✅ WORTH IT";
-                out.className = "font-bold text-lg text-green-400";
+                res.innerText = "✅ WORTH IT";
+                res.className = "p-3 bg-slate-950 rounded-lg border border-slate-800 text-center font-bold text-lg text-green-400";
             } else {
-                out.innerText = "❌ NOT WORTH IT";
-                out.className = "font-bold text-lg text-red-500";
+                res.innerText = "❌ NOT WORTH IT";
+                res.className = "p-3 bg-slate-950 rounded-lg border border-slate-800 text-center font-bold text-lg text-red-500";
             }
         }
 
