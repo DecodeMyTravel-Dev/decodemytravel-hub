@@ -34,14 +34,14 @@
                     <label class="block text-[10px] text-slate-500 uppercase font-bold">Package Cost / Day ($)</label>
                     <input type="number" id="pkg_price" value="75" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="avg_cocktail" value="14" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
-                        <input type="number" id="avg_beer" value="8" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
+                        <input type="number" id="avg_cocktail" value="14" class="w-full bg-slate-800 p-4 rounded-xl outline-none" placeholder="Cocktail $">
+                        <input type="number" id="avg_beer" value="8" class="w-full bg-slate-800 p-4 rounded-xl outline-none" placeholder="Beer $">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="qty_cocktails" value="4" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
-                        <input type="number" id="qty_beers" value="2" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
+                        <input type="number" id="qty_cocktails" value="4" class="w-full bg-slate-800 p-4 rounded-xl outline-none" placeholder="Qty Cocktails">
+                        <input type="number" id="qty_beers" value="2" class="w-full bg-slate-800 p-4 rounded-xl outline-none" placeholder="Qty Beers">
                     </div>
-                    <button onclick="doDrinks()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl uppercase">Analyze Value</button>
+                    <button onclick="doDrinks()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl uppercase hover:bg-cyan-400 transition">Analyze Value</button>
                     <div id="res_drinks" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center font-bold"></div>
                 </div>
             </section>
@@ -52,29 +52,29 @@
                     <input type="number" id="bag_in" value="50" class="flex-1 bg-slate-800 p-4 rounded-xl outline-none">
                     <select id="bag_u" class="bg-slate-800 p-4 rounded-xl font-bold text-cyan-400"><option value="lb">LB</option><option value="kg">KG</option></select>
                 </div>
-                <button onclick="doBags()" class="w-full bg-slate-700 font-bold py-4 rounded-xl uppercase">Convert</button>
+                <button onclick="doBags()" class="w-full bg-slate-700 font-bold py-4 rounded-xl uppercase hover:bg-slate-600 transition">Convert</button>
                 <div id="res_bags" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center text-cyan-400 font-mono text-xl"></div>
             </section>
 
             <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
                 <h2 class="text-cyan-400 font-bold mb-4 uppercase text-[11px] italic">Tipping Compass</h2>
                 <div class="grid grid-cols-2 gap-2 mb-4">
-                    <div><input type="checkbox" class="t-box chip-checkbox" id="c1" data-t="🇲🇽 MEXICO: 10-15% guides. USD $1s king."><label for="c1" class="chip-label">MEXICO</label></div>
-                    <div><input type="checkbox" class="t-box chip-checkbox" id="c2" data-t="🇧🇸 BAHAMAS: 15% service charge Nassau."><label for="c2" class="chip-label">BAHAMAS</label></div>
-                    <div><input type="checkbox" class="t-box chip-checkbox" id="c3" data-t="🇰🇳 CARIBBEAN: 15% taxi tours."><label for="c3" class="chip-label">CARIBBEAN</label></div>
-                    <div><input type="checkbox" class="t-box chip-checkbox" id="c4" data-t="🇪🇺 EUROPE: €1-2 drinks; €5 dinner."><label for="c4" class="chip-label">EUROPE</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c1" data-t="🇲🇽 <strong>MEXICO:</strong> 10-15% for guides. USD $1 bills are king."><label for="c1" class="chip-label">MEXICO</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c2" data-t="🇧🇸 <strong>BAHAMAS:</strong> 15% service charge usually included in Nassau."><label for="c2" class="chip-label">BAHAMAS</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c3" data-t="🇰🇳 <strong>CARIBBEAN:</strong> Standard 15% for taxi tours unless noted."><label for="c3" class="chip-label">CARIBBEAN</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c4" data-t="🇪🇺 <strong>EUROPE:</strong> Modest tipping. €1-2 for drinks; €5 for dinner."><label for="c4" class="chip-label">EUROPE</label></div>
                 </div>
-                <button onclick="doTips()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl uppercase">Generate Tips Sheet</button>
+                <button onclick="doTips()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl uppercase hover:bg-cyan-400 transition">Generate Tips Sheet</button>
                 <div id="res_tips" style="display:none;" class="mt-4 p-5 bg-slate-950 rounded-xl text-xs space-y-2 text-slate-300"></div>
             </section>
         </div>
 
         <div class="lg:col-span-7">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl min-h-[850px] flex flex-col overflow-hidden shadow-2xl">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl min-h-[900px] flex flex-col overflow-hidden shadow-2xl">
                 <div class="flex">
                     <button id="b1" onclick="tab('drink')" class="tab-btn active">Drink Index</button>
                     <button id="b2" onclick="tab('bag')" class="tab-btn">Baggage Manual</button>
-                    <button id="b3" onclick="tab('tip')" class="tab-btn">Tipping/Gratuities</button>
+                    <button id="b3" onclick="tab('tip')" class="tab-btn">Tipping Guide</button>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto custom-scroll leading-relaxed">
                     
@@ -91,7 +91,7 @@
                                 </tbody>
                             </table>
                             <p><strong>2. Top Tier Packages:</strong> Princess Premier ($100-$105), Celebrity Premium ($85-$105), Carnival Cheers ($72-$84).</p>
-                            <p><strong>3. Logic:</strong> Decoder assumes $14 cocktails/$8 beer with 20% auto-tip included in value analysis.</p>
+                            <p><strong>3. Logic:</strong> Decoder adds 20% auto-tip to single purchases. Port days reduce package value.</p>
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
                             <ul class="space-y-3 text-[11px] bg-slate-950 p-4 rounded-xl">
                                 <li><strong>Personal Item:</strong> 17x10x9in. Must fit under seat.</li>
                                 <li><strong>Carry-On:</strong> 22x14x9in. Must include wheels and handles.</li>
-                                <li><strong>Checked Bag:</strong> 50 lbs (23 kg) limit for Economy.</li>
+                                <li><strong>Checked Bag:</strong> 50 lbs (23 kg) Economy / 70 lbs (32 kg) First.</li>
                             </ul>
                             <p><strong>2. Regional Carriers:</strong> Extreme weight sensitivity. Often capped at 10kg carry-on. Excess charged per kilo.</p>
                         </div>
@@ -111,9 +111,9 @@
                     <div id="p3" style="display:none;">
                         <h3 class="text-cyan-400 font-black text-xl mb-6 uppercase italic border-b border-slate-800 pb-2">The Global Tipping Manual (2026)</h3>
                         <div class="space-y-6 text-sm text-slate-300">
-                            <p><strong>1. The "Automatic" Trap:</strong> 2026 Auto-Gratuity covers room/dining staff, but NOT shore excursion guides.</p>
+                            <p><strong>1. The "Automatic" Trap:</strong> 2026 Auto-Gratuity ($18-$20/day) covers room/dining staff, but NOT shore excursion guides.</p>
                             <p><strong>2. Shore Excursion Etiquette:</strong> Drivers: $2-$5 per person. Specialist Guides: $10-$20. Private Drivers: 10-15%.</p>
-                            <p><strong>3. Port Restaurants:</strong> Look for "Servicio Incluido" or "Propina" before adding a tip.</p>
+                            <p><strong>3. Port Intelligence:</strong> USD is King in Mexico/Bahamas. Look for "Servicio Incluido" on restaurant bills before tipping extra.</p>
                         </div>
                     </div>
 
@@ -131,4 +131,26 @@
             if(t==='tip'){document.getElementById('p3').style.display='block';document.getElementById('b3').className='tab-btn active';}
         }
         function doDrinks() {
-            const p = parseFloat(document.getElementById('pkg
+            const p = parseFloat(document.getElementById('pkg_price').value)||0;
+            const c = parseFloat(document.getElementById('avg_cocktail').value)||0;
+            const b = parseFloat(document.getElementById('avg_beer').value)||0;
+            const qc = parseInt(document.getElementById('qty_cocktails').value)||0;
+            const qb = parseInt(document.getElementById('qty_beers').value)||0;
+            const tot = ((qc*c)+(qb*b))*1.2;
+            const r = document.getElementById('res_drinks'); r.style.display='block';
+            r.innerHTML = tot >= p ? `<span style="color:#4ade80">✅ WORTH IT ($${(tot-p).toFixed(2)})</span>` : `<span style="color:#f87171">❌ NOT WORTH IT</span>`;
+        }
+        function doBags() {
+            const v = parseFloat(document.getElementById('bag_in').value)||0;
+            const u = document.getElementById('bag_u').value;
+            const r = document.getElementById('res_bags'); r.style.display='block';
+            r.innerText = u==='lb' ? (v*0.45).toFixed(1)+" KG" : (v*2.2).toFixed(1)+" LB";
+        }
+        function doTips() {
+            const r = document.getElementById('res_tips'); let h = "";
+            document.querySelectorAll('.t-box').forEach(cb => { if(cb.checked) h += `<div style="border-bottom:1px solid #1e293b;padding-bottom:5px;">${cb.getAttribute('data-t')}</div>`; });
+            r.style.display='block'; r.innerHTML = h || "Select a region";
+        }
+    </script>
+</body>
+</html>
