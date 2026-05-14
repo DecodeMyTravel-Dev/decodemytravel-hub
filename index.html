@@ -1,60 +1,112 @@
-<script>
-        // TOOL 1: DRINK LOGIC
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decode My Travel | Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white font-sans min-h-screen p-4">
+
+    <header class="max-w-4xl mx-auto mb-8 text-center pt-8">
+        <h1 class="text-3xl font-black text-cyan-400 tracking-tighter uppercase">Decode My Travel</h1>
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1 italic">Logistics Hub v1.1 // May 2026</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+
+        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <h2 class="text-cyan-400 font-bold mb-4 uppercase text-sm italic">// 01. Drink Decoder</h2>
+            <div class="space-y-4">
+                <input type="number" id="pkgPrice" value="75" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm outline-none">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" id="qtyCocktails" value="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm">
+                    <input type="number" id="qtyBeers" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm">
+                </div>
+                <button onclick="decodeDrinks()" class="w-full bg-cyan-500 text-slate-900 font-black py-3 rounded-lg text-sm uppercase">Decode Value</button>
+                <div id="drinkRes" class="hidden p-3 bg-slate-950 rounded-lg border border-slate-800 text-center">
+                    <p id="drinkOutcome" class="font-bold text-lg text-green-400"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <h2 class="text-cyan-400 font-bold mb-4 uppercase text-sm italic">// 02. Baggage Shield</h2>
+            <div class="space-y-4">
+                <div class="flex gap-2">
+                    <input type="number" id="weightInput" value="50" class="flex-1 bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm outline-none">
+                    <select id="unit" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm font-bold text-cyan-400">
+                        <option value="lb">LB</option>
+                        <option value="kg">KG</option>
+                    </select>
+                </div>
+                <button onclick="convertWeight()" class="w-full bg-slate-700 text-white font-bold py-3 rounded-lg text-sm uppercase">Convert</button>
+                <div id="weightRes" class="hidden p-3 bg-slate-950 rounded-lg border border-slate-800 text-center font-mono text-cyan-400 text-lg"></div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl md:col-span-2">
+            <h2 class="text-cyan-400 font-bold mb-4 uppercase text-sm italic">// 03. Tipping Compass</h2>
+            <div class="space-y-4">
+                <select id="portSelect" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white">
+                    <option value="" disabled selected>Select Destination</option>
+                    <option value="mexico">Mexico (Cozumel/Costa Maya)</option>
+                    <option value="bahamas">The Bahamas (Nassau/CocoCay)</option>
+                    <option value="europe">Western Europe (Spain/Italy)</option>
+                </select>
+                <button onclick="decodeTips()" class="w-full bg-cyan-500 text-slate-900 font-black py-3 rounded-lg text-sm uppercase">Decode Etiquette</button>
+                <div id="tipRes" class="hidden p-4 bg-slate-950 rounded-lg border border-slate-800">
+                    <p id="tipOutcome" class="text-xs leading-relaxed text-slate-300"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
         function decodeDrinks() {
             const pkg = parseFloat(document.getElementById('pkgPrice').value) || 0;
             const c = (parseInt(document.getElementById('qtyCocktails').value) || 0) * 14;
             const b = (parseInt(document.getElementById('qtyBeers').value) || 0) * 8;
             const totalWithTip = (c + b) * 1.20; 
-            
             const res = document.getElementById('drinkRes');
             const out = document.getElementById('drinkOutcome');
-            const details = document.getElementById('drinkDetails');
             res.classList.remove('hidden');
-            
             if (totalWithTip >= pkg) {
                 out.innerText = "✅ WORTH IT";
                 out.className = "font-bold text-lg text-green-400";
-                details.innerText = "Includes 20% savings over a la carte";
             } else {
                 out.innerText = "❌ NOT WORTH IT";
                 out.className = "font-bold text-lg text-red-500";
-                details.innerText = "You're overpaying for the package";
             }
         }
 
-        // TOOL 2: WEIGHT LOGIC
         function convertWeight() {
             const val = parseFloat(document.getElementById('weightInput').value) || 0;
             const unit = document.getElementById('unit').value;
             const res = document.getElementById('weightRes');
             res.classList.remove('hidden');
-
             if (unit === 'lb') {
-                res.innerText = val + " LB = " + (val * 0.453592).toFixed(1) + " KG";
+                res.innerText = val + " LB = " + (val * 0.45).toFixed(1) + " KG";
             } else {
-                res.innerText = val + " KG = " + (val * 2.20462).toFixed(1) + " LB";
+                res.innerText = val + " KG = " + (val * 2.2).toFixed(1) + " LB";
             }
         }
 
-        // TOOL 3: TIP LOGIC (FIXED)
         function decodeTips() {
-            const selectEl = document.getElementById('portSelect');
-            const port = selectEl.value;
+            const port = document.getElementById('portSelect').value;
             const res = document.getElementById('tipRes');
             const out = document.getElementById('tipOutcome');
-
             const guides = {
-                "mexico": "🇲🇽 10-15% is standard for guides. In 2026, USD $1 bills are still king for quick tips in Cozumel/Costa Maya. Check the bill for 'Propina' before adding more.",
-                "bahamas": "🇧🇸 Nassau/CocoCay restaurants now almost universally include a 15% service charge. $2-5 for luggage/shuttles is appropriate.",
-                "europe": "🇪🇺 Tipping is a gesture, not a requirement. Round up the change for coffee; €2-5 total for a nice dinner. Drivers expect nothing unless service is exceptional.",
-                "caribbean": "🇰🇳 St. Maarten/Antigua: Standards follow US rules (15%) unless 'Service Included' is printed on the receipt. Check carefully."
+                "mexico": "🇲🇽 10-15% for guides. USD $1 bills are king. Check for 'Propina'.",
+                "bahamas": "🇧🇸 Nassau: 15% service charge is usually included. $2-5 for luggage.",
+                "europe": "🇪🇺 Tipping is modest. Round up for coffee; €2-5 for dinner."
             };
-
             if (port in guides) {
                 out.innerText = guides[port];
                 res.classList.remove('hidden');
-            } else {
-                alert("Please select a destination first.");
             }
         }
     </script>
+</body>
+</html>
