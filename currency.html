@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Logistics | Decode My Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #22d3ee; border-radius: 10px; }
+        .tab-btn { flex: 1; padding: 20px 0; font-size: 10px; font-weight: 900; text-transform: uppercase; color: #64748b; border-bottom: 1px solid #1e293b; background: #020617; }
+        .tab-btn.active { color: #22d3ee; border-bottom: 3px solid #22d3ee; }
+    </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen p-4 md:p-10">
+
+    <header class="max-w-7xl mx-auto mb-10">
+        <a href="index.html" class="text-cyan-400 text-xs font-black uppercase tracking-widest hover:underline">← Back to Quick Tools</a>
+        <h1 class="text-4xl font-black text-white uppercase tracking-tighter mt-4">Global Logistics <span class="text-cyan-400">2026</span></h1>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <div class="lg:col-span-5 space-y-6">
+            
+            <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl">
+                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] italic tracking-widest">Cross-Currency "Reality" Converter</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">I have 100 Units of:</label>
+                        <select id="base_curr" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm font-bold text-white outline-none">
+                            <option value="1">USD (US Dollar)</option>
+                            <option value="0.92">EUR (Euro)</option>
+                            <option value="0.79">GBP (British Pound)</option>
+                            <option value="1.36">CAD (Canadian Dollar)</option>
+                            <option value="1.52">AUD (Australian Dollar)</option>
+                            <option value="155.50">JPY (Japanese Yen)</option>
+                            <option value="17.10">MXN (Mexican Peso)</option>
+                            <option value="0.89">CHF (Swiss Franc)</option>
+                            <option value="7.23">CNY (Chinese Yuan)</option>
+                            <option value="1.35">SGD (Singapore Dollar)</option>
+                            <option value="1.00">BSD (Bahamian Dollar)</option>
+                            <option value="11.00">NOK (Norwegian Krone)</option>
+                            <option value="10.80">SEK (Swedish Krona)</option>
+                            <option value="83.30">INR (Indian Rupee)</option>
+                            <option value="5.10">BRL (Brazilian Real)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-slate-500 font-bold uppercase mb-1">Converting to:</label>
+                        <select id="target_curr" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm font-bold text-white outline-none">
+                            <option value="0.92">EUR (Euro)</option>
+                            <option value="1">USD (US Dollar)</option>
+                            <option value="0.79">GBP (British Pound)</option>
+                            <option value="17.10">MXN (Mexican Peso)</option>
+                            <option value="155.50">JPY (Japanese Yen)</option>
+                            <option value="1.36">CAD (Canadian Dollar)</option>
+                            <option value="1.52">AUD (Australian Dollar)</option>
+                            <option value="0.89">CHF (Swiss Franc)</option>
+                            <option value="1.00">BSD (Bahamian Dollar)</option>
+                            <option value="11.00">NOK (Norwegian Krone)</option>
+                        </select>
+                    </div>
+                    <button onclick="convertCurrency()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl text-sm uppercase hover:bg-cyan-400 transition">Calculate Expected Return</button>
+                    
+                    <div id="curr_res" class="hidden mt-4 p-5 bg-slate-950 rounded-xl border border-slate-800 text-center">
+                        <div class="text-[10px] text-slate-500 uppercase font-bold mb-1">You should receive approx:</div>
+                        <div id="curr_val" class="text-3xl font-black text-cyan-400"></div>
+                        <div class="text-[9px] text-slate-600 mt-2 uppercase italic font-bold leading-tight">Includes 4% "Traveler's Reality Fee" (Bank/ATM spreads)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl overflow-hidden">
+                <h2 class="text-cyan-400 font-bold mb-4 uppercase text-[11px] italic tracking-widest">2026 Volatility Index (vs USD)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-[10px]">
+                        <thead class="text-slate-500 uppercase border-b border-slate-800">
+                            <tr><th class="pb-2">Currency</th><th class="pb-2">52W Low</th><th class="pb-2">52W High</th><th class="pb-2">Planning Zone</th></tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800/50"><td class="py-2 font-bold text-white">EUR/USD</td><td>1.04</td><td>1.12</td><td class="text-cyan-400">1.08 - 1.15</td></tr>
+                            <tr class="border-b border-slate-800/50"><td class="py-2 font-bold text-white">GBP/USD</td><td>1.21</td><td>1.31</td><td class="text-cyan-400">1.25 - 1.35</td></tr>
+                            <tr class="border-b border-slate-800/50"><td class="py-2 font-bold text-white">MXN/USD</td><td>16.20</td><td>18.50</td><td class="text-cyan-400">17.0 - 19.0</td></tr>
+                            <tr class="border-b border-slate-800/50"><td class="py-2 font-bold text-white">JPY/USD</td><td>140.0</td><td>160.0</td><td class="text-cyan-400">145.0 - 165.0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-[9px] text-slate-500 mt-4 italic font-bold uppercase">Table tracks the strength of the USD against foreign units.</p>
+            </section>
+        </div>
+
+        <div class="lg:col-span-7">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl min-h-[850px] flex flex-col overflow-hidden shadow-2xl">
+                
+                <div class="flex bg-slate-950/50 border-b border-slate-800">
+                    <button id="b1" onclick="tab('curr')" class="tab-btn active">Currency Intelligence</button>
+                    <button id="b2" onclick="tab('air')" class="tab-btn">Airport Survival</button>
+                </div>
+
+                <div class="p-8 flex-1 overflow-y-auto custom-scroll leading-relaxed">
+                    
+                    <div id="p1" style="display:block;">
+                        <h3 class="text-cyan-400 font-black text-xl mb-6 uppercase italic border-b border-slate-800 pb-2">The Global Tipping & Currency Manual (2026)</h3>
+                        <div class="space-y-6 text-sm text-slate-300">
+                            <section>
+                                <h4 class="text-white font-black uppercase text-xs mb-2">1. The "Mid-Market" Illusion</h4>
+                                <p>Standard converters show the "Interbank" rate. In 2026, between currency exchange booths, bank fees, and "dynamic currency conversion" at credit card terminals, the average traveler loses <strong>3% to 7%</strong> on every transaction. Our calculator builds in a <strong>4% "Reality Buffer"</strong> to ensure you aren't short on cash.</p>
+                            </section>
+                            <section>
+                                <h4 class="text-white font-black uppercase text-xs mb-2">2. Strategic Exchange Tips</h4>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li><strong>Avoid the Terminal:</strong> Airport and Cruise Pier exchange booths are "convenience traps" with the worst spreads in the industry.</li>
+                                    <li><strong>Local ATMs:</strong> Usually provide the best rate, provided you use a card with "No Foreign Transaction Fees."</li>
+                                    <li><strong>"Pay in Local":</strong> When a card machine asks if you want to pay in USD or Local Currency—<strong>ALWAYS choose Local Currency.</strong> The machine's conversion rate is almost always a scam.</li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div id="p2" style="display:none;">
+                        <h3 class="text-cyan-400 font-black text-xl mb-6 uppercase italic border-b border-slate-800 pb-2">Airport Survival: 2026 Logistics</h3>
+                        <div class="space-y-6 text-sm text-slate-300">
+                            <section>
+                                <h4 class="text-white font-black uppercase text-xs mb-2">1. The Security Modernization</h4>
+                                <p>By 2026, CT Scanners are the global standard. This means in most major hubs (LHR, DXB, ATL), you no longer remove liquids or laptops. However, "Secondary Screening" has increased for electronics—keep your gear organized and accessible.</p>
+                            </section>
+                            <section>
+                                <h4 class="text-white font-black uppercase text-xs mb-2">2. Lounge Access vs. The Gate Trap</h4>
+                                <p>Gate seating is becoming more restrictive to encourage terminal spending. If you don't have a lounge membership (Priority Pass/Amex), look for "Rest Zones" usually located near the highest-numbered gates where foot traffic is lowest.</p>
+                            </section>
+                            <section>
+                                <h4 class="text-white font-black uppercase text-xs mb-2">3. The 3-2-1 Rule</h4>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li><strong>3 Hours:</strong> Arrival before International departures.</li>
+                                    <li><strong>2 Hours:</strong> Arrival before Domestic departures.</li>
+                                    <li><strong>1 Hour:</strong> Your final window to clear security before the "Late Passenger" lockout begins.</li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function tab(t) {
+            document.getElementById('p1').style.display='none'; document.getElementById('p2').style.display='none';
+            document.getElementById('b1').className='tab-btn'; document.getElementById('b2').className='tab-btn';
+            if(t==='curr'){document.getElementById('p1').style.display='block';document.getElementById('b1').className='tab-btn active';}
+            if(t==='air'){document.getElementById('p2').style.display='block';document.getElementById('b2').className='tab-btn active';}
+        }
+
+        function convertCurrency() {
+            const baseRate = parseFloat(document.getElementById('base_curr').value);
+            const targetRate = parseFloat(document.getElementById('target_curr').value);
+            
+            // Logic: 100 / base * target * 0.96 (4% fee)
+            const raw = (100 / baseRate) * targetRate;
+            const result = raw * 0.96; 
+
+            const resDiv = document.getElementById('curr_res');
+            const valDiv = document.getElementById('curr_val');
+            
+            resDiv.className = "mt-4 p-5 bg-slate-950 rounded-xl border border-slate-800 text-center block";
+            valDiv.innerText = result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+    </script>
+</body>
+</html>
