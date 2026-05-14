@@ -2,136 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Global Logistics | Decode My Travel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics Hub | Decode My Travel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .tab-btn { flex: 1; padding: 15px; font-weight: 900; text-transform: uppercase; background: #0f172a; border: 1px solid #1e293b; color: #64748b; font-size: 11px; }
-        .tab-btn.active { color: #22d3ee; border-bottom: 3px solid #22d3ee; }
-        .hidden-panel { display: none; }
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #22d3ee; border-radius: 10px; }
+        .tab-btn { flex: 1; padding: 20px 0; font-size: 10px; font-weight: 900; text-transform: uppercase; color: #64748b; border-bottom: 1px solid #1e293b; background: #020617; }
+        .tab-btn.active { color: #22d3ee; border-bottom: 3px solid #22d3ee; }
+        .chip-checkbox { display: none; }
+        .chip-label { cursor: pointer; border: 1px solid #334155; display: flex; align-items: center; justify-content: center; height: 3rem; border-radius: 0.75rem; font-size: 0.7rem; text-align: center; }
+        .chip-checkbox:checked + .chip-label { background-color: #06b6d4; border-color: #06b6d4; color: #0f172a; font-weight: 900; }
     </style>
 </head>
-<body class="bg-slate-950 text-white p-4 md:p-10 font-sans">
+<body class="bg-slate-950 text-white min-h-screen p-4 md:p-10 font-sans">
 
-    <header class="max-w-6xl mx-auto mb-10 border-b border-slate-800 pb-6">
-        <h1 class="text-3xl font-black uppercase text-cyan-400">Global Logistics Hub</h1>
-        <p class="text-slate-500 text-xs font-bold uppercase mt-1 tracking-widest italic">Currency Matrix & Port-Entry Intelligence</p>
+    <header class="max-w-7xl mx-auto mb-10 text-center">
+        <h1 class="text-4xl font-black text-cyan-400 uppercase tracking-tighter italic">DECODE MY TRAVEL</h1>
+        <div class="mt-6">
+            <a href="currency.html" class="bg-cyan-500 text-slate-950 px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-cyan-400 transition inline-block">
+                Open Currency & Airport Manual →
+            </a>
+        </div>
     </header>
 
-    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
-        
-        <div class="lg:col-span-5 space-y-8">
-            <section class="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-2xl">
-                <h2 class="text-white font-black uppercase text-sm mb-6 italic tracking-widest text-cyan-400">Reality Converter (100 Unit Base)</h2>
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-[10px] text-slate-500 mb-2 uppercase font-bold tracking-widest">Base Currency (I Have):</label>
-                        <select id="from_val" class="w-full bg-slate-800 p-4 rounded-xl text-sm border border-slate-700 font-bold text-white outline-none">
-                            <option value="1">USD (Dollar)</option>
-                            <option value="0.92">EUR (Euro)</option>
-                            <option value="0.79">GBP (Pound)</option>
-                            <option value="1.36">CAD (Canada)</option>
-                            <option value="155.5">JPY (Yen)</option>
-                            <option value="17.1">MXN (Peso)</option>
-                            <option value="1.52">AUD (Australia)</option>
-                            <option value="1.35">SGD (Singapore)</option>
-                            <option value="1.0">BSD (Bahamas)</option>
-                            <option value="11.0">NOK (Norway)</option>
-                            <option value="10.8">SEK (Sweden)</option>
-                            <option value="83.3">INR (India)</option>
-                            <option value="5.1">BRL (Brazil)</option>
-                            <option value="3.75">SAR (Saudi)</option>
-                            <option value="0.91">CHF (Swiss)</option>
-                        </select>
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5 space-y-6">
+            <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
+                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] italic">Drink Package Decoder</h2>
+                <div class="space-y-4">
+                    <label class="block text-[10px] text-slate-500 uppercase font-bold">Package Cost / Day ($)</label>
+                    <input type="number" id="pkg_price" value="75" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" id="avg_cocktail" value="14" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
+                        <input type="number" id="avg_beer" value="8" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
                     </div>
-                    <div>
-                        <label class="block text-[10px] text-slate-500 mb-2 uppercase font-bold tracking-widest">Target Currency (I Want):</label>
-                        <select id="to_val" class="w-full bg-slate-800 p-4 rounded-xl text-sm border border-slate-700 font-bold text-white outline-none">
-                            <option value="0.92">EUR (Euro)</option>
-                            <option value="1">USD (Dollar)</option>
-                            <option value="0.79">GBP (Pound)</option>
-                            <option value="17.1">MXN (Peso)</option>
-                            <option value="1.36">CAD (Canada)</option>
-                            <option value="155.5">JPY (Yen)</option>
-                            <option value="1.52">AUD (Australia)</option>
-                            <option value="1.35">SGD (Singapore)</option>
-                            <option value="1.0">BSD (Bahamas)</option>
-                            <option value="11.0">NOK (Norway)</option>
-                            <option value="10.8">SEK (Sweden)</option>
-                            <option value="83.3">INR (India)</option>
-                            <option value="5.1">BRL (Brazil)</option>
-                            <option value="3.75">SAR (Saudi)</option>
-                            <option value="0.91">CHF (Swiss)</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" id="qty_cocktails" value="4" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
+                        <input type="number" id="qty_beers" value="2" class="w-full bg-slate-800 p-4 rounded-xl outline-none">
                     </div>
-                    <button onclick="runConvert()" class="w-full bg-cyan-500 text-slate-950 font-black py-5 rounded-xl uppercase tracking-widest hover:bg-cyan-400">Analyze Return</button>
-                    
-                    <div id="curr_output" class="hidden-panel mt-4 p-8 bg-slate-950 border border-slate-800 rounded-2xl text-center">
-                        <p class="text-slate-500 text-[10px] font-bold uppercase mb-2">Estimated Cash in Hand:</p>
-                        <p id="final_amt" class="text-5xl font-black text-cyan-400 tracking-tighter"></p>
-                        <p class="text-[9px] text-slate-600 mt-4 italic uppercase font-black tracking-widest leading-tight">Includes 4% "Reality Tax" (Bank/ATM Spread & Hidden Fees)</p>
-                    </div>
+                    <button onclick="doDrinks()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl uppercase">Analyze Value</button>
+                    <div id="res_drinks" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center font-bold"></div>
                 </div>
+            </section>
+
+            <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
+                <h2 class="text-cyan-400 font-bold mb-6 uppercase text-[11px] italic">Baggage Weight Converter</h2>
+                <div class="flex gap-2 mb-4">
+                    <input type="number" id="bag_in" value="50" class="flex-1 bg-slate-800 p-4 rounded-xl outline-none">
+                    <select id="bag_u" class="bg-slate-800 p-4 rounded-xl font-bold text-cyan-400"><option value="lb">LB</option><option value="kg">KG</option></select>
+                </div>
+                <button onclick="doBags()" class="w-full bg-slate-700 font-bold py-4 rounded-xl uppercase">Convert</button>
+                <div id="res_bags" style="display:none;" class="mt-4 p-4 bg-slate-950 rounded-xl text-center text-cyan-400 font-mono text-xl"></div>
+            </section>
+
+            <section class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
+                <h2 class="text-cyan-400 font-bold mb-4 uppercase text-[11px] italic">Tipping Compass</h2>
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c1" data-t="🇲🇽 MEXICO: 10-15% guides. USD $1s king."><label for="c1" class="chip-label">MEXICO</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c2" data-t="🇧🇸 BAHAMAS: 15% service charge Nassau."><label for="c2" class="chip-label">BAHAMAS</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c3" data-t="🇰🇳 CARIBBEAN: 15% taxi tours."><label for="c3" class="chip-label">CARIBBEAN</label></div>
+                    <div><input type="checkbox" class="t-box chip-checkbox" id="c4" data-t="🇪🇺 EUROPE: €1-2 drinks; €5 dinner."><label for="c4" class="chip-label">EUROPE</label></div>
+                </div>
+                <button onclick="doTips()" class="w-full bg-cyan-500 text-slate-900 font-black py-4 rounded-xl uppercase">Generate Tips Sheet</button>
+                <div id="res_tips" style="display:none;" class="mt-4 p-5 bg-slate-950 rounded-xl text-xs space-y-2 text-slate-300"></div>
             </section>
         </div>
 
         <div class="lg:col-span-7">
-            <div class="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden min-h-[650px] flex flex-col shadow-2xl">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl min-h-[850px] flex flex-col overflow-hidden shadow-2xl">
                 <div class="flex">
-                    <button id="btn-c" onclick="showTab('c')" class="tab-btn active">Currency Intelligence</button>
-                    <button id="btn-a" onclick="showTab('a')" class="tab-btn">Airport & Port Entry</button>
+                    <button id="b1" onclick="tab('drink')" class="tab-btn active">Drink Index</button>
+                    <button id="b2" onclick="tab('bag')" class="tab-btn">Baggage Manual</button>
+                    <button id="b3" onclick="tab('tip')" class="tab-btn">Tipping/Gratuities</button>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto custom-scroll leading-relaxed">
-                    <div id="pan-c" class="space-y-6">
-                        <h3 class="text-cyan-400 font-black uppercase text-xl border-b border-slate-800 pb-2 italic">Currency Intelligence (2026)</h3>
-                        <div class="text-sm text-slate-300 space-y-4">
-                            <p><strong>1. The "Mid-Market" Illusion:</strong> Google shows the "Perfect" rate. In reality, bank fees and ATM spreads cost you 3%–7%. Our calculator builds in a <strong>4% Reality Buffer</strong> so you know what you'll actually have to spend.</p>
-                            <p><strong>2. The Dynamic Conversion Scam:</strong> When a card terminal asks if you want to pay in "Your Home Currency" or "Local Currency"—<strong>ALWAYS pick Local.</strong> Choosing your home currency allows the merchant to set their own predatory exchange rate.</p>
-                            <p><strong>3. Volatility Index:</strong> The Euro and Pound swing 6-8% annually. If the rate is 1.10, budget for 1.15 to protect your trip budget from sudden market shifts.</p>
+                    
+                    <div id="p1" style="display:block;">
+                        <h3 class="text-cyan-400 font-black text-xl mb-6 uppercase italic border-b border-slate-800 pb-2">Cruise Drink Decoder: The 2026 Price Index</h3>
+                        <div class="space-y-6 text-sm text-slate-300">
+                            <p><strong>1. A La Carte Pricing:</strong> Tracking the 20% "hidden tax" (automatic gratuity) applied on most lines.</p>
+                            <table class="w-full border border-slate-800 text-[11px] text-left">
+                                <thead class="bg-slate-800 text-cyan-400 uppercase"><tr><th class="p-2">Line</th><th class="p-2">Cocktail</th><th class="p-2">Beer</th><th class="p-2">Tip</th></tr></thead>
+                                <tbody class="bg-slate-950/50 italic">
+                                    <tr class="border-b border-slate-800"><td>Princess</td><td>$12–$15</td><td>$7.50–$9</td><td>20%</td></tr>
+                                    <tr class="border-b border-slate-800"><td>Royal Caribbean</td><td>$14–$16</td><td>$8–$10</td><td>18%</td></tr>
+                                    <tr><td>Carnival</td><td>$12–$15</td><td>$7.50–$9</td><td>20%</td></tr>
+                                </tbody>
+                            </table>
+                            <p><strong>2. Top Tier Packages:</strong> Princess Premier ($100-$105), Celebrity Premium ($85-$105), Carnival Cheers ($72-$84).</p>
+                            <p><strong>3. Logic:</strong> Decoder assumes $14 cocktails/$8 beer with 20% auto-tip included in value analysis.</p>
                         </div>
                     </div>
-                    <div id="pan-a" class="hidden-panel space-y-6">
-                        <h3 class="text-cyan-400 font-black uppercase text-xl border-b border-slate-800 pb-2 italic">Airport & Port Exchange Traps</h3>
-                        <div class="text-sm text-slate-300 space-y-5">
-                            <section>
-                                <h4 class="text-white font-bold uppercase text-xs">1. The "Convenience" Tax at Arrivals</h4>
-                                <p>Exchange kiosks at airport arrivals (Travelex, Global Blue) are the most expensive places on earth to get cash. You will often lose **12-15%** of your value through a combination of bad rates and "zero commission" lies.</p>
-                            </section>
-                            <section>
-                                <h4 class="text-white font-bold uppercase text-xs">2. Airport & Cruise Port ATMs</h4>
-                                <p>ATMs located inside the terminal or right at the cruise pier are often "Private" (like Euronet). These machines have two ways of taking your money:
-                                    <ul class="list-disc pl-5 mt-2 space-y-1 text-slate-400 italic">
-                                        <li>High flat-rate usage fees ($5-$10 per pull).</li>
-                                        <li>"Suggested" conversion rates that are 10% worse than the bank rate.</li>
-                                    </ul>
-                                </p>
-                            </section>
-                            <section>
-                                <h4 class="text-white font-bold uppercase text-xs">3. The 2026 Strategy</h4>
-                                <p>Carry $100 in local cash for emergencies, but use a credit card with <strong>No Foreign Transaction Fees</strong> for 90% of purchases. If you MUST use an ATM, walk two blocks away from the airport or port to find a "Big Brand" local bank machine.</p>
-                            </section>
+
+                    <div id="p2" style="display:none;">
+                        <h3 class="text-cyan-400 font-black text-xl mb-6 uppercase italic border-b border-slate-800 pb-2">Baggage Considerations: The 2026 Manual</h3>
+                        <div class="space-y-6 text-sm text-slate-300">
+                            <p><strong>1. Standard for "Big Three" (AA, Delta, United):</strong> Standard for 2026 is <strong>Volumetric Compliance</strong>. If it doesn't fit the sizer, it's a gate-check.</p>
+                            <ul class="space-y-3 text-[11px] bg-slate-950 p-4 rounded-xl">
+                                <li><strong>Personal Item:</strong> 17x10x9in. Must fit under seat.</li>
+                                <li><strong>Carry-On:</strong> 22x14x9in. Must include wheels and handles.</li>
+                                <li><strong>Checked Bag:</strong> 50 lbs (23 kg) limit for Economy.</li>
+                            </ul>
+                            <p><strong>2. Regional Carriers:</strong> Extreme weight sensitivity. Often capped at 10kg carry-on. Excess charged per kilo.</p>
                         </div>
                     </div>
+
+                    <div id="p3" style="display:none;">
+                        <h3 class="text-cyan-400 font-black text-xl mb-6 uppercase italic border-b border-slate-800 pb-2">The Global Tipping Manual (2026)</h3>
+                        <div class="space-y-6 text-sm text-slate-300">
+                            <p><strong>1. The "Automatic" Trap:</strong> 2026 Auto-Gratuity covers room/dining staff, but NOT shore excursion guides.</p>
+                            <p><strong>2. Shore Excursion Etiquette:</strong> Drivers: $2-$5 per person. Specialist Guides: $10-$20. Private Drivers: 10-15%.</p>
+                            <p><strong>3. Port Restaurants:</strong> Look for "Servicio Incluido" or "Propina" before adding a tip.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        function showTab(type) {
-            document.getElementById('pan-c').style.display = type === 'c' ? 'block' : 'none';
-            document.getElementById('pan-a').style.display = type === 'a' ? 'block' : 'none';
-            document.getElementById('btn-c').className = type === 'c' ? 'tab-btn active' : 'tab-btn';
-            document.getElementById('btn-a').className = type === 'a' ? 'tab-btn active' : 'tab-btn';
+        function tab(t) {
+            document.getElementById('p1').style.display='none'; document.getElementById('p2').style.display='none'; document.getElementById('p3').style.display='none';
+            document.getElementById('b1').className='tab-btn'; document.getElementById('b2').className='tab-btn'; document.getElementById('b3').className='tab-btn';
+            if(t==='drink'){document.getElementById('p1').style.display='block';document.getElementById('b1').className='tab-btn active';}
+            if(t==='bag'){document.getElementById('p2').style.display='block';document.getElementById('b2').className='tab-btn active';}
+            if(t==='tip'){document.getElementById('p3').style.display='block';document.getElementById('b3').className='tab-btn active';}
         }
-        function runConvert() {
-            const from = parseFloat(document.getElementById('from_val').value);
-            const to = parseFloat(document.getElementById('to_val').value);
-            const res = (100 / from) * to * 0.96; 
-            document.getElementById('curr_output').style.display = 'block';
-            document.getElementById('final_amt').innerText = res.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        }
-    </script>
-</body>
-</html>
+        function doDrinks() {
+            const p = parseFloat(document.getElementById('pkg
